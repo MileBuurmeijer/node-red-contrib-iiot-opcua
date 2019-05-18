@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-iiot-opcua",
-  "version": "3.10.3",
+  "version": "4.0.0-alpha.0",
   "description": "The next evolution IoT/IIoT OPC UA toolbox package for Node-RED based on node-opcua.",
   "repository": {
     "type": "git",
@@ -8,16 +8,16 @@
   },
   "dependencies": {
     "better-assert": "1.0.2",
-    "cron": "1.7.0",
+    "cron": "1.7.1",
     "debug": "4.1.1",
     "easy-table": "1.1.1",
     "es6-map": "0.1.5",
-    "node-opcua": "0.7.2",
+    "node-opcua": "2.0.0-alpha.28",
     "source-map-support": "0.5.12",
     "stately.js": "1.3.0",
     "treeify": "1.1.0",
     "underscore": "1.9.1",
-    "vm2": "3.6.11"
+    "vm2": "3.8.1"
   },
   "keywords": [
     "node-red",
@@ -58,7 +58,7 @@
     }
   },
   "engines": {
-    "node": ">=6.10"
+    "node": ">=10.0"
   },
   "scripts": {
     "postinstall": "node ./create_certificates.js demo --dev -s -r ./certificates",
@@ -68,10 +68,15 @@
     "test:ci": "standard --fix && jest --verbose --detectOpenHandles --forceExit --logHeapUsage --ci --debug",
     "coverage:ci": "standard --fix && jest --coverage --verbose --detectOpenHandles --forceExit --logHeapUsage --ci --debug",
     "coverage:upload": "cat ./jcoverage/lcov.info | codacy-coverage --token eded179f99764906b775603a52e8a5b4",
-    "build": "standard --fix && gulp publish",
+    "build": "standard --fix && gulp",
     "prepublishOnly": "npm test && npm run coverage && npm run build",
     "ci-publish": "ci-publish",
-    "release": "standard-version -a",
+    "clean": "./clean.sh",
+    "clean:formatter": "standard --fix",
+    "release": "standard-version",
+    "release:dry": "npm run clean:formatter && npm run release  -- --dry-run",
+    "release:minor": "npm run clean:formatter && npm run release -- --release-as minor",
+    "release:alpha": "npm run clean:formatter && npm run release -- --prerelease alpha",
     "inspect": "jsinspect ./src > .jsinspect-results.json",
     "rewrite-changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
   },
@@ -82,13 +87,14 @@
     "create_certificates.js"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.4.3",
-    "@babel/core": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@node-red/nodes": "^0.20.5",
     "ci-publish": "^1.3.1",
     "codacy-coverage": "^3.4.0",
-    "conventional-changelog-cli": "^2.0.12",
-    "gulp": "^4.0.0",
+    "conventional-changelog-cli": "^2.0.21",
+    "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-clean": "^0.4.0",
     "gulp-htmlmin": "^5.0.1",
@@ -97,16 +103,16 @@
     "gulp-sequence": "^1.0.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
-    "jest": "^24.7.1",
-    "jsdoc": "^3.5.5",
+    "jest": "^24.8.0",
+    "jsdoc": "^3.6.2",
     "nock": "^10.0.6",
     "node-red": "^0.20.5",
     "node-red-node-test-helper": "^0.2.2",
     "pump": "^3.0.0",
-    "sinon": "^7.3.1",
+    "sinon": "^7.3.2",
     "standard": "^12.0.1",
-    "standard-version": "^5.0.2",
-    "uglify-js": "^3.5.3",
+    "standard-version": "^6.0.1",
+    "uglify-js": "^3.5.13",
     "uglify-js-harmony": "^2.7.7",
     "weak": "^1.0.1",
     "when": "^3.7.8"

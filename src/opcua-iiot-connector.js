@@ -1,7 +1,7 @@
 /*
  The BSD 3-Clause License
 
- Copyright 2016,2017,2018 - Klaus Landsdorf (http://bianco-royal.de/)
+ Copyright 2016,2017,2018,2019 - Klaus Landsdorf (http://bianco-royal.de/)
  Copyright 2015,2016 - Mika Karaila, Valmet Automation Inc. (node-red-contrib-opcua)
  All rights reserved.
  node-red-contrib-iiot-opcua
@@ -504,14 +504,18 @@ module.exports = function (RED) {
     node.bianco.iiot.resetOPCUAObjects = function () {
       coreConnector.detailDebugLog('Reset All OPC UA Objects')
       node.bianco.iiot.sessionNodeRequests = 0
+      /*
       if (node.bianco.iiot.opcuaClient) {
+
         node.bianco.iiot.opcuaClient.removeAllListeners()
       }
+      */
       node.bianco.iiot.opcuaClient = null
-
+      /*
       if (node.bianco.iiot.opcuaSession) {
         node.bianco.iiot.opcuaSession.removeAllListeners()
       }
+      */
       node.bianco.iiot.opcuaSession = null
     }
 
