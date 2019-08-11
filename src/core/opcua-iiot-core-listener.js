@@ -222,8 +222,8 @@ de.biancoroyal.opcua.iiot.core.listener.buildNewMonitoredItem = function (nodeId
       let queueSize
       let options = (msg.payload.listenerParameters) ? msg.payload.listenerParameters : msg.payload
       if (typeof options.interval === 'number' &&
-        options.interval <= coreListener.MAX_LISTENER_INTERVAL &&
-        options.interval >= coreListener.MIN_LISTENER_INTERVAL) {
+          options.interval <= coreListener.MAX_LISTENER_INTERVAL &&
+          ( options.interval >= coreListener.MIN_LISTENER_INTERVAL || options.interval == 0)) {
         interval = parseInt(options.interval)
       } else {
         interval = coreListener.SUBSCRIBE_DEFAULT_INTERVAL
@@ -273,8 +273,8 @@ de.biancoroyal.opcua.iiot.core.listener.buildNewMonitoredItemGroup = function (n
 
       let options = (msg.payload.listenerParameters) ? msg.payload.listenerParameters : msg.payload
       if (typeof options.interval === 'number' &&
-        options.interval <= coreListener.MAX_LISTENER_INTERVAL &&
-        options.interval >= coreListener.MIN_LISTENER_INTERVAL) {
+          options.interval <= coreListener.MAX_LISTENER_INTERVAL &&
+          ( options.interval >= coreListener.MIN_LISTENER_INTERVAL || options.interval == 0)) {
         interval = parseInt(options.interval)
       } else {
         interval = coreListener.SUBSCRIBE_DEFAULT_INTERVAL
